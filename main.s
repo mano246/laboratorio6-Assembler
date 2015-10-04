@@ -50,7 +50,7 @@ drawImage:
 	mov r7, #0
 	inicioC:
 		inicioR:
-			ldr r5, = fondo
+			//ldr r5, = fondo
 			ldrh r6, [r5, r7]
 			strh r6, [r4]
 			add r4, #2
