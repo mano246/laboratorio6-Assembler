@@ -32,12 +32,23 @@ main:
 		
 		//Empieza el ciclo infinito de filas y columnas
 		draw:
-			ldr r2, = fondoHeight
+			/*
+			*ldr r2, = fondoHeight
+			*ldr r2, [r2]				//y
+			*ldr r3, = fondoWidth
+			*ldr r3, [r3]				//x
+			*ldr r4, [r4, #32]			//fbAddr
+			*ldr r5, =fondo
+			*push {r5}
+			*bl drawImage
+			*/
+			
+			ldr r2, = nemoHeight
 			ldr r2, [r2]				//y
-			ldr r3, = fondoWidth
+			ldr r3, = nemoWidth
 			ldr r3, [r3]				//x
 			ldr r4, [r4, #32]			//fbAddr
-			ldr r5, =fondo
+			ldr r5, =nemo
 			push {r5}
 			bl drawImage
 			
@@ -50,7 +61,6 @@ drawImage:
 	mov r7, #0
 	inicioC:
 		inicioR:
-			//ldr r5, = fondo
 			ldrh r6, [r5, r7]
 			strh r6, [r4]
 			add r4, #2
@@ -59,9 +69,12 @@ drawImage:
 			
 			teq r3, #0
 			bne inicioR
+			
+		ldr r8,=1848 	//(1024-100)*2=1848		//Estas dos líneas solo van a servir para cuando es nemo.
+		add r4,r8
+		
 		sub r2, #1
 		teq r2, #0
 		bne inicioC
 	pop {pc}
-		
 		
